@@ -10,7 +10,7 @@ const Page = forwardRef(({ children, title = '', meta, ...other }, ref) => (
   <>
     <Helmet>
       {/* <title>{`${title} | Minimal-UI`}</title> */}
-      {meta}
+      {/* {meta} */}
     </Helmet>
 
     <Box ref={ref} {...other}>

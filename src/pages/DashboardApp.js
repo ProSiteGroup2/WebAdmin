@@ -31,6 +31,7 @@ export default function DashboardApp() {
   const [tranCount, setTranCount] = useState(0);
   const [consCount, setConsCount] = useState(0);
   const [proCount, setProCount] = useState(0);
+  
 
   const total = hwCount+contCount+labtCount+tranCount;
 
@@ -52,6 +53,7 @@ export default function DashboardApp() {
   const getTransporter = async () =>{
     const data = await axios.get("https://prositegroup2.herokuapp.com/admin/getTransporters");
     setTranCount(data.data.transporters.length);
+    
   };
   const getProducts = async () => {
     const datap = await axios.get("https://prositegroup2.herokuapp.com/admin/getProducts");
@@ -62,6 +64,7 @@ export default function DashboardApp() {
     const data = await axios.get("https://prositegroup2.herokuapp.com/admin/getConsumers");
     setConsCount(data.data.consumers.length);
   };
+  
 
 
   useEffect(()=>{
@@ -90,54 +93,66 @@ export default function DashboardApp() {
           </Grid>
 
           <Grid item xs={12} sm={6} md={3}>
-            <AppWidgetSummary title="Total Products" total={proCount} color="warning" icon={'fa-solid:tools'} />
+            <AppWidgetSummary title="Total Products" total={proCount} color="warning" icon={'ep:goods-filled'} />
           </Grid>
 
           <Grid item xs={12} sm={6} md={3}>
-            <AppWidgetSummary title="Bug Reports" total={23} color="error" icon={'ant-design:bug-filled'} />
+            <AppWidgetSummary title="Total Hardwares" total={hwCount} color="error" icon={'fa-solid:tools'} />
           </Grid>
 
-          <Grid item xs={12} md={6} lg={8}>
+          <Grid item xs={12} sm={6} md={3}>
+            <AppWidgetSummary title="Total Transporters" total={tranCount} color="error" icon={'icon-park-solid:transporter'} />
+          </Grid>
+
+          <Grid item xs={12} sm={6} md={3}>
+            <AppWidgetSummary title="Total Contractors" total={contCount} color="error" icon={'emojione-monotone:construction-worker'} />
+          </Grid>
+
+          <Grid item xs={12} sm={6} md={3}>
+            <AppWidgetSummary title="Total Labours" total={labtCount} color="error" icon={'fa-solid:tools'} />
+          </Grid>
+
+         
+
+
+          {/* <Grid item xs={12} md={6} lg={8}>
             <AppWebsiteVisits
-              title="App Users"
-              subheader="(+43%) than last year"
+              title="Hardwares vs Products"
               chartLabels={[
-                '01/01/2022',
-                '02/01/2022',
-                '03/01/2022',
-                '04/01/2022',
-                '05/01/2022',
-                '06/01/2022',
-                '07/01/2022',
-                '08/01/2022',
-                '09/01/2022',
-                '10/01/2022',
-                '11/01/2022',
+                '01/09/2022',
+                '02/09/2022',
+                '03/09/2022',
+                '04/09/2022',
+                '05/09/2022',
+                '06/09/2022',
+                '07/09/2022',
+                '08/09/2022',
+                '09/09/2022',
+                '10/09/2022',
+                '11/09/2022',
+                '12/09/2022',
               ]}
               chartData={[
+      
                 {
-                  name: 'Consumers',
+                  name: 'Hardwares',
                   type: 'column',
                   fill: 'solid',
-                  data: [contCount, 11, 22, 27, 13, 22, 37, 21, 44, 22, 30],
+                  data: [15, 11, 22, 27, 13, 22, 37, 21,hwCount, 22, 30,24],
                 },
+               
                 {
-                  name: 'Service Providers',
+                  name: 'Products',
                   type: 'area',
                   fill: 'gradient',
-                  data: [44, 55, 41, 67, 22, 43, 21, 41, 56, 27, 43],
+                  data: [16, 55, 41, 67, 22, 43, 21, 41,proCount, 56, 27, 43],
                 },
-                // {
-                //   name: 'Team C',
-                //   type: 'line',
-                //   fill: 'solid',
-                //   data: [30, 25, 36, 30, 45, 35, 64, 52, 59, 36, 39],
-                // },
+               
               ]}
             />
-          </Grid>
+          </Grid> */}
 
-          <Grid item xs={12} md={6} lg={4}>
+          {/* <Grid item xs={12} md={6} lg={4}>
             <AppCurrentVisits
               title="Current Visits(Provincialy)"
               chartData={[
@@ -180,7 +195,7 @@ export default function DashboardApp() {
                 { label: 'United Kingdom', value: 1380 },
               ]}
             />
-          </Grid>
+          </Grid> */}
 
           {/* <Grid item xs={12} md={6} lg={4}>
             <AppCurrentSubject
