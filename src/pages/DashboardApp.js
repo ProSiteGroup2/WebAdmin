@@ -109,7 +109,7 @@ export default function DashboardApp() {
           </Grid>
 
           <Grid item xs={12} sm={6} md={3}>
-            <AppWidgetSummary title="Total Labours" total={labtCount} color="error" icon={'fa-solid:tools'} />
+            <AppWidgetSummary title="Total Labours" total={labtCount} color="error" icon={'carbon:construction'} />
           </Grid>
 
          
