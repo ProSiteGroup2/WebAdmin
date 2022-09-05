@@ -8,6 +8,7 @@ import MenuPopover from '../../components/MenuPopover';
 // mocks_
 import account from '../../_mock/account';
 
+
 // ----------------------------------------------------------------------
 
 const MENU_OPTIONS = [
@@ -101,9 +102,11 @@ export default function AccountPopover() {
 
         <Divider sx={{ borderStyle: 'dashed' }} />
 
-        <MenuItem onClick={handleClose} sx={{ m: 1 }}>
-          Logout
+      <RouterLink to="/">
+        <MenuItem onClick={handleClose} sx={{ m: 1, textDecoration:'none' }}>
+            Logout  
         </MenuItem>
+      </RouterLink>
       </MenuPopover>
     </>
   );

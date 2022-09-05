@@ -194,7 +194,7 @@ const User = () => {
   
   
     const handleUnblockTra = (email) => {
-      axios.put(`https://prositegroup2.herokuapp.com/transportStatus/${email}/active`)
+      axios.put(`https://prositegroup2.herokuapp.com/transporterStatus/${email}/active`)
       .then(() => {
         getTransporter();
       })
@@ -334,7 +334,7 @@ const User = () => {
           console.log(data);
           return (
             <>
-              <Avatar src={"http://res.cloudinary.com/muthahhar97/image/upload/v1659546006/images/"} />
+              <Avatar src={"http://res.cloudinary.com/muthahhar97/image/upload/v1659546150/images/…"} />
             </>
           );
         }

@@ -11,11 +11,23 @@ import NotFound from './pages/Page404';
 import Register from './pages/Register';
 import Items from './pages/Products';
 import DashboardApp from './pages/DashboardApp';
+import Notification from './pages/Notification';
 
 // ----------------------------------------------------------------------
 
 export default function Router() {
   return useRoutes([
+    {
+      path: '/',
+      element: <LogoOnlyLayout />,
+      children: [
+        { path: '/', element: <Navigate to="/login" /> },
+        { path: 'login', element: <Login /> },
+        { path: 'register', element: <Register /> },
+        { path: '404', element: <NotFound /> },
+        { path: '*', element: <Navigate to="/404" /> },
+      ],
+    },
     {
       path: '/dashboard',
       element: <DashboardLayout />,
@@ -24,19 +36,9 @@ export default function Router() {
         { path: 'user', element: <User /> },
         { path: 'consumer', element: <Consumer />},
         { path: 'items', element: <Items /> },
+        // { path: 'notification', element: <Notification /> },
       
         // { path: 'blog', element: <Blog /> },
-      ],
-    },
-    {
-      path: '/',
-      element: <LogoOnlyLayout />,
-      children: [
-        { path: '/', element: <Navigate to="/dashboard/app" /> },
-        { path: 'login', element: <Login /> },
-        { path: 'register', element: <Register /> },
-        { path: '404', element: <NotFound /> },
-        { path: '*', element: <Navigate to="/404" /> },
       ],
     },
     { path: '*', element: <Navigate to="/404" replace /> },

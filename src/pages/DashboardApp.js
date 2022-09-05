@@ -119,7 +119,7 @@ export default function DashboardApp() {
                   name: 'Consumers',
                   type: 'column',
                   fill: 'solid',
-                  data: [23, 11, 22, 27, 13, 22, 37, 21, 44, 22, 30],
+                  data: [contCount, 11, 22, 27, 13, 22, 37, 21, 44, 22, 30],
                 },
                 {
                   name: 'Service Providers',
@@ -163,7 +163,7 @@ export default function DashboardApp() {
             />
           </Grid>
 
-          {/* <Grid item xs={12} md={6} lg={8}>
+          <Grid item xs={12} md={6} lg={8}>
             <AppConversionRates
               title="Conversion Rates"
               subheader="(+43%) than last year"
@@ -182,7 +182,7 @@ export default function DashboardApp() {
             />
           </Grid>
 
-          <Grid item xs={12} md={6} lg={4}>
+          {/* <Grid item xs={12} md={6} lg={4}>
             <AppCurrentSubject
               title="Current Subject"
               chartLabels={['English', 'History', 'Physics', 'Geography', 'Chinese', 'Math']}

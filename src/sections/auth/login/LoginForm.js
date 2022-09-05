@@ -1,7 +1,8 @@
 import * as Yup from 'yup';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 // form
+import axios from "axios";
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 // @mui
@@ -13,8 +14,43 @@ import { FormProvider, RHFTextField, RHFCheckbox } from '../../../components/hoo
 
 // ----------------------------------------------------------------------
 
+
+
 export default function LoginForm() {
+
+  const { register, handleSubmit } = useForm();
+  const onSubmit = data => console.log(data);
+
+  const [token, setToken] = useState("");
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (token) {
+      navigate("/");
+    }
+  }, [token, navigate]);
+
+
+  
+  function han4dleSubmit() {
+
+    // event.preventDefault();
+    console.log("Ok");
+    axios
+      .post("https://prositegroup2.herokuapp.com/adminLogin", {
+        password,
+        email
+      })
+      .then((res) => {
+        console.log(res);
+        console.log(res.data.token);
+        setToken(res.data.token);
+        window.localStorage.setItem("token", res.data.token);
+        alert("Successfully Login");
+      });
+  }
 
   const [showPassword, setShowPassword] = useState(false);
 
@@ -34,21 +70,25 @@ export default function LoginForm() {
     defaultValues,
   });
 
-  const {
-    handleSubmit,
-    formState: { isSubmitting },
-  } = methods;
+  // const {
+  //   handleSubmit,
+  //   formState: { isSubmitting },
+  // } = methods;
 
-  const onSubmit = async () => {
-    navigate('/dashboard', { replace: true });
-  };
+  // const onSubmit = async () => {
+  //   navigate('/dashboard', { replace: true });
+  // };
+  // const onSubmit = data => console.log(data);
 
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
       <Stack spacing={3}>
-        <RHFTextField name="email" label="Email address" />
-
+        <RHFTextField name="email" label="Email address"  {...register("first")}
+              autoComplete="email" autoFocus/>
+       
         <RHFTextField
+        {...register("firstName")}
+        autoComplete="current-password"
           name="password"
           label="Password"
           type={showPassword ? 'text' : 'password'}
@@ -62,18 +102,19 @@ export default function LoginForm() {
             ),
           }}
         />
+        <LoadingButton fullWidth size="large" type="submit" variant="contained" >
+        Login
+      </LoadingButton>
       </Stack>
 
-      <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ my: 2 }}>
+      {/* <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ my: 2 }}>
         <RHFCheckbox name="remember" label="Remember me" />
         <Link variant="subtitle2" underline="hover">
           Forgot password?
         </Link>
-      </Stack>
+      </Stack> */}
 
-      <LoadingButton fullWidth size="large" type="submit" variant="contained" loading={isSubmitting}>
-        Login
-      </LoadingButton>
+      
     </FormProvider>
   );
 }

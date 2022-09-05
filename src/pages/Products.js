@@ -1,6 +1,7 @@
 import { React, useState, useEffect, useRef} from 'react';
+import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
-import { filter } from 'lodash';
+// import { filter } from 'lodash';
 import { DataGrid } from "@mui/x-data-grid";
 import axios from 'axios';
 import { Menu, MenuItem, Card, IconButton, ListItemIcon, ListItemText, Table, Stack, Avatar, Button, Checkbox, TableRow, TableBody, TableCell, Container, Typography, TableContainer, TablePagination } from '@mui/material';
@@ -14,7 +15,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import NativeSelect from '@mui/material/NativeSelect';
-import Iconify from '../components/Iconify';
+import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import Label from '../components/Label';
 import Page from '../components/Page';
 import Scrollbar from '../components/Scrollbar';
@@ -22,6 +23,8 @@ import SearchNotFound from '../components/SearchNotFound';
 import { UserListHead, UserListToolbar, UserMoreMenu } from '../sections/@dashboard/user';
 import USERLIST from '../_mock/user';
 // import { nextDay } from 'date-fns';
+import ItemCard from '../sections/@dashboard/products/ItemCard';
+
 
 
 
@@ -36,9 +39,11 @@ const User = () => {
     const [searchText, setSearchText] = useState('');
     const [hoveredRow,setHoveredRow] = useState(null);
     
-    const ref = useRef(null);
+    
     const [isOpen, setIsOpen] = useState(false);
     const [status, setStatus] = useState("");
+    const [show, setShow] = useState(false);
+    const [item, setItem] = useState([]);
 
 
     const onMouseEnterRow = (event) => {
@@ -49,7 +54,9 @@ const User = () => {
     const onMouseLeaveRow = (event) => {
       setHoveredRow(null);
     };
-  
+
+    const handleView = (id) => { setShow(true); }
+    const handleClose = (id) => { setShow(false); }
 
     const getAllData = async () => {
       try{
@@ -94,6 +101,21 @@ const User = () => {
         console.log(err);
       }
     }
+//  const getDetails = async () => {
+//     const data = await axios.get(`https://prositegroup2.herokuapp.com/getProductInfo/${props.id}`)
+//     setItem(data.data.product);
+    
+//   }
+    // const getDetails = (id) => {
+    //   const data =  axios.get(`https://prositegroup2.herokuapp.com/getProductInfo/${id}`)
+    //   .then(() => {
+    //     setItem(data.data.product);
+        
+    //   })
+      
+      // setSeller(data.data.product.seller);
+    // }
+    
 
     const columns = [
       
@@ -102,8 +124,9 @@ const User = () => {
           console.log(data);
           return (
             <>
-              <Avatar src={"http://res.cloudinary.com/muthahhar97/image/upload/v1659546006/images/"} />
-              {/* {"http://res.cloudinary.com/muthahhar97/image/upload/v1659546006/images/"} */}
+              <Avatar> 
+            <img src={item.imageUrl} alt="text"/>
+          </Avatar>
             </>
           );
         }
@@ -178,16 +201,23 @@ const User = () => {
                   <IconButton onClick={() => handleDelete(params.row._id)}>
                     <DeleteIcon color="error" />
                   </IconButton>
+
+                  <IconButton >
+                    <RemoveRedEyeIcon color="info" onClick={() => handleView(params.id)}/>
+                  </IconButton>
+
+                  <ItemCard show={show} id={params.row._id} handleClose={handleClose}/>
                 </Box> 
               );
               }
           }
         }
       ];
-      
+     
 
   useEffect(()=>{
     getAllData();
+    // getDetails();
   },[rows.status]);
 
   function escapeRegExp(value) {

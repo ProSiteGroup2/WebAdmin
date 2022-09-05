@@ -1,14 +1,19 @@
 import { Link as RouterLink } from 'react-router-dom';
+
+
+
 // @mui
 import { styled } from '@mui/material/styles';
 import { Card, Link, Container, Typography } from '@mui/material';
+
+import LoginFormNew from '../sections/auth/login/LoginFormNew';
 // hooks
 import useResponsive from '../hooks/useResponsive';
 // components
 import Page from '../components/Page';
 import Logo from '../components/Logo';
 // sections
-import { LoginForm } from '../sections/auth/login';
+// import { LoginForm } from '../sections/auth/login';
 import AuthSocial from '../sections/auth/AuthSocial';
 
 // ----------------------------------------------------------------------
@@ -65,24 +70,24 @@ export default function Login() {
     <Page title="Login">
       <RootStyle>
         <HeaderStyle>
-          { <Logo /> }
+          {/* { <Logo /> } */}
 
-          {smUp && (
-            <Typography variant="body2" sx={{ mt: { md: -2 } }}>
-              Don’t have an account? {''}
-              <Link variant="subtitle2" component={RouterLink} to="/register">
-                Get started
-              </Link>
-            </Typography>
-          )}
+          {/* {smUp && (
+            // <Typography variant="body2" sx={{ mt: { md: -2 } }}>
+            //   Don’t have an account? {''}
+            //   <Link variant="subtitle2" component={RouterLink} to="/register">
+            //     Get started
+            //   </Link>
+            // </Typography>
+          )} */}
         </HeaderStyle>
 
         {mdUp && (
           <SectionStyle>
             <Typography variant="h3" sx={{ px: 5, mt: 10, mb: 5 }}>
-              Hi, Welcome Back
+              Hi, Welcome to the Prosite Admin Panel
             </Typography>
-            <img src="/static/illustrations/illustration_login.png" alt="login" />
+            <img src="/static/illustrations/login.png" alt="login" />
           </SectionStyle>
         )}
 
@@ -96,16 +101,16 @@ export default function Login() {
 
             <AuthSocial />
 
-            <LoginForm />
+            <LoginFormNew />
 
-            {!smUp && (
+            {/* {!smUp && (
               <Typography variant="body2" align="center" sx={{ mt: 3 }}>
                 Don’t have an account?{' '}
                 <Link variant="subtitle2" component={RouterLink} to="/register">
                   Get started
                 </Link>
               </Typography>
-            )}
+            )} */}
           </ContentStyle>
         </Container>
       </RootStyle>
